@@ -1,0 +1,167 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Trendmag Blogger Template” Documentation by “ThemeXpose” v1.0
+    </title>
+    <link rel="alternate" type="application/rss+xml" title="arlinadesign.blogspot.com" href="feed/index.html">
+    <link href="http://fonts.googleapis.com/css?family=Raleway:700,600,500,400,300" rel="stylesheet" type="text/css">
+    <link href='http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel='stylesheet'/>
+    <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "css/prettify.css" %}">
+
+    <script src="{% static "js/bootstrap.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/jquery.min.js" %}"></script>
+
+    <script type="text/javascript" src="{% static "js/prettify/prettify.js" %}"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+    <script src="{% static "js/layout.js" %}"></script>
+    <script src="{% static "js/jquery.localscroll-1.2.7.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jquery.scrollTo-1.4.3.1.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/top.js" %}" type="text/javascript"></script>
+</head>
+<body>
+
+    <!--BartEx Header
+        <header>
+          <div style="max-height: 90%">
+            <h2 style="color:#000000" >BartEx</h2>
+          </div>
+        </header>-->
+
+
+
+    <!--Sign Up Form-->
+    <form class="form-signin" data-toggle="validator" role="form" method="POST" action="signupback.php">
+
+
+        <div class="form-group">
+        <center>
+            <label for="inputName" class="control-label" style="display: inline" >First Name</label>
+            <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter First Name" required style="display: inline" >
+        </center>
+        </div>
+
+        <div class="form-group">
+        <center>
+            <label for="inputName" class="control-label" style="display: inline">Last Name</label>
+            <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Last Name" required style="display: inline" >
+        </center>
+        </div>
+
+        <div class="form-group">
+        <center>
+            <label for="inputName" class="control-label" style="display: inline">Username</label>
+            <input type="text" class="form-control" id="uname" name="uname" placeholder="Enter User Name" required style="display: inline" >
+        </center>
+        </div>
+
+        <div class="form-group">
+            <center>
+                <label for="inputEmail" class="control-label" style="display: inline" >Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" style="display: inline" data-error="Wrong Email id or username" required>
+                <div class="help-block with-errors"></div>
+            </center>
+        </div>
+
+        <div class="form-group">
+        <center>
+            <label for="inputName" class="control-label" style="display: inline">Age</label>
+            <input type="number" class="form-control" id="age" name="age" placeholder="How old are you?" required style="display: inline" >
+        </center>
+        </div>
+
+        <div class="form-group">
+            <center>
+            <div style="display: inline">
+                <label  style="display: inline">Male<input class="radio-inline"type="radio" name="gender" id="gender" value="Male" checked="" style="width: 10%"></label>
+                <label  style="display: inline">Female<input class="radio-inline"type="radio" name="gender" id="gender" value="Female" checked="" style="width: 10%"></label>
+            </div>
+            </center>
+        </div>
+
+        <div class="form-group">
+            <center>
+                <label for="inputName" class="control-label" style="display: inline">Street</label>
+                <input type="text" class="form-control" id="street" name="street" placeholder="Enter Street" style="display: inline">
+            </center>
+        </div>
+
+        <div class="form-group">
+            <center>
+                <label for="inputName" class="control-label" style="display: inline">City</label>
+                <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" style="display: inline">
+            </center>
+        </div>
+
+        <div class="form-group">
+            <center>
+                <label for="inputName" class="control-label" style="display: inline">State</label>
+                <input type="text" class="form-control" id="state" name="state" placeholder="Enter State" style="display: inline">
+            </center>
+        </div>
+
+        <div class="form-group">
+            <center>
+                <label for="inputName" class="control-label" style="display: inline">Country</label>
+                <input type="text" class="form-control" id="country" name="country" placeholder="Enter Country" style="display: inline">
+            </center>
+        </div>
+
+        <div class="form-group">
+            <center>
+                <label for="inputName" class="control-label" style="display: inline">Zip Code</label>
+                <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Enter Zip Code" style="display: inline">
+            </center>
+        </div>
+
+        <div class="form-group">
+            <center>
+                <label for="inputName" class="control-label" style="display: inline">Contact No.</label>
+                <input type="text" class="form-control" id="contact" name="contact" placeholder="Enter Contact Number with (+1)" style="display: inline">
+            </center>
+        </div>
+
+        <div class="form-group">
+            <center>
+                <label for="inputName" class="control-label" style="display: inline">Profession</label>
+                <input type="text" class="form-control" id="profession" name="profession" placeholder="Enter Profession" style="display: inline">
+            </center>
+        </div>
+
+        <div class="form-group">
+            <center>
+                <label for="inputName" class="control-label" style="display: inline">Password</label>
+                <input type="password" data-minlength="6" class="form-control" name="password" id="password" placeholder="Password" required  style="display: inline">
+                <div class="help-block">Minimum of 6 characters</div>
+            </center>
+        </div>
+
+        <div class="form-group">
+            <center>
+                <label for="inputName" class="control-label" style="display: inline">Confirm Password</label>
+                <input type="password" class="form-control" id="passwordConfirm" data-match="#password" data-match-error="Oops! Please enter same password" placeholder="Confirm" required  style="display: inline">
+                <div class="help-block with-errors"></div>
+            </center>
+        </div>
+
+        <div class="form-group">
+            <center><button type="submit" class="btn btn-primary">Submit</button></div></center>
+        </div>
+    </form>
+
+
+
+
+
+
+</body>
+</html>
