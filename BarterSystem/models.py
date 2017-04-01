@@ -1,13 +1,17 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-'''
+
+
+from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 # Create your models here.
 class User(models.Model):
     fname = models.CharField(max_length=40,null=False)
     lname = models.CharField(max_length=40,null=False)
-    uid = models.AutoField(max_length=40,primary_key=True,null=False)
+    uid = models.AutoField(primary_key=True,null=False)
     email = models.EmailField(max_length=100,unique=True,null=False)
-    age = models.PositiveIntegerField(null=False)
+    age = models.PositiveIntegerField(null=False,default=16)
 
     Male = 'M'
     Female = 'F'
@@ -30,7 +34,7 @@ class ProductCategory(models.Model):
 
 class Post(models.Model):
     pid = models.AutoField(primary_key=True,null=False)
-    uid = models.ForeignKey('User',on_delete=models.CASCADE,null=False)
+    posted_by_uid = models.ForeignKey('User',on_delete=models.CASCADE,null=True,related_name='posted_by_uid')
     product_name = models.CharField(max_length=40,null=False)
     product_desc = models.CharField(max_length=150,null=False)
     product_age = models.PositiveIntegerField(null=False)
@@ -40,39 +44,39 @@ class Post(models.Model):
     Passive = 'P'
     Post_Status = ((Active, 'A'), (Passive, 'P'))
     post_status = models.CharField(max_length=1,choices=Post_Status,default=Active,null=False)
-    post_timestamp = models.DateTimeField(auto_now=True, primary_key=True, null=False)
+    post_timestamp = models.DateTimeField(auto_now=True, null=False)
     estimated_price = models.DecimalField(max_digits=15,decimal_places=3,default=0.0)
 
 class SwapChoice(models.Model):
-    pid = models.ForeignKey('Post',on_delete=models.CASCADE,primary_key=True,null=False)
-    cid = models.ForeignKey('ProductCategory',on_delete=models.CASCADE,primary_key=True,null=False)
+    pid = models.ForeignKey('Post',on_delete=models.CASCADE,null=True)
+    cid = models.ForeignKey('ProductCategory',on_delete=models.CASCADE,null=True)
 
 class Tag(models.Model):
-    pid = models.ForeignKey('Post',on_delete=models.CASCADE,primary_key=True,null=False)
+    pid = models.ForeignKey('Post',on_delete=models.CASCADE,null=True)
     tag_name = models.CharField(primary_key=True,null=False,max_length=40)
 
 class Swap(models.Model):
-    senderPid = models.ForeignKey('Post',on_delete=models.CASCADE,primary_key=True)
-    receiverPid= models.ForeignKey('Post',on_delete=models.CASCADE,primary_key=True)
+    sender_pid = models.ForeignKey('Post',on_delete=models.CASCADE,related_name='sender_pid',null=True)
+    receiver_pid= models.ForeignKey('Post',on_delete=models.CASCADE,related_name='receiver_pid',null=True)
 
     Accepted = 'A'
     Rejected = 'R'
     Pending = 'P'
     Swap_Status = ((Accepted, 'A'), (Rejected, 'R'), (Pending, 'P'))
     swap_status = models.CharField(max_length=1, choices=Swap_Status, default=Pending, null=False)
-    swap_timestamp = models.DateTimeField(auto_now=True, primary_key=True, null=False)
+    swap_timestamp = models.DateTimeField(auto_now=True, null=False)
 
 
 class PostReviews(models.Model):
-    uid = models.ForeignKey('User', on_delete=models.CASCADE,primary_key=True,null=False)
-    pid = models.ForeignKey('Post',on_delete=models.CASCADE,primary_key=True, null=False)
+    uid = models.ForeignKey('User', on_delete=models.CASCADE,null=True)
+    pid = models.ForeignKey('Post',on_delete=models.CASCADE,null=True)
     comment = models.CharField(max_length=150,null=False)
     rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0),MaxValueValidator(5)])
     post_review_timestamp = models.DateTimeField(auto_now=True, primary_key=True, null=False)
 
 class UserReviews(models.Model):
-    commentingUid = models.ForeignKey('User', on_delete=models.CASCADE,primary_key=True,null=False)
-    commentOnUid = models.ForeignKey('User',on_delete=models.CASCADE,primary_key=True, null=False)
+    commenting_uid = models.ForeignKey('User', on_delete=models.CASCADE,null=True,related_name='commenting_uid')
+    comment_on_uid = models.ForeignKey('User',on_delete=models.CASCADE,null=True,related_name='comment_on_uid')
     comment = models.CharField(max_length=150,null=False)
     rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(0),MaxValueValidator(5)])
     user_review_timestamp = models.DateTimeField(auto_now=True, primary_key=True, null=False)
@@ -80,15 +84,21 @@ class UserReviews(models.Model):
 
 
 class Like(models.Model):
-    uid =  models.ForeignKey('User', on_delete=models.CASCADE, primary_key=True, null=False)
-    pid = models.ForeignKey('Post', on_delete=models.CASCADE, primary_key=True, null=False)
-    like_timestamp = models.DateTimeField(auto_now=True, primary_key=True, null=False)
+    uid =  models.ForeignKey('User', on_delete=models.CASCADE,null=True)
+    pid = models.ForeignKey('Post', on_delete=models.CASCADE,null=True)
+    like_timestamp = models.DateTimeField(auto_now=True, null=False)
 
 class Favourite(models.Model):
-    uid = models.ForeignKey('User', on_delete=models.CASCADE, primary_key=True, null=False)
-    pid = models.ForeignKey('Post', on_delete=models.CASCADE, primary_key=True, null=False)
-    favourite_timestamp = models.DateTimeField(auto_now=True, primary_key=True, null=False)
-'''
+    uid = models.ForeignKey('User', on_delete=models.CASCADE,null=True)
+    pid = models.ForeignKey('Post', on_delete=models.CASCADE,null=True)
+    favourite_timestamp = models.DateTimeField(auto_now=True,null=False)
+
+
+
+
+
+
+
 
 
 
