@@ -40,9 +40,9 @@
 
 
     <!--Sign In Form-->
-    <form class="form-signin" method ="POST" action="#">
+    <form class="form-signin" method ="POST" action="/homepage/"> {% csrf_token %}
         <br><br><br><br><br><br><br>
-        <input type="text" class="form-control" placeholder="Email" name="uname" required autofocus><br>
+        <input type="text" class="form-control" placeholder="Email" name="email" required autofocus><br>
         <input type="password" class="form-control" placeholder="Password" name="password" required><br>
         <center><button class="btn btn-lg btn-primary" type="submit">Sign in</button></center>
     </form>
