@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from requests_aws4auth import AWS4Auth
+
+awsauth = AWS4Auth('AKIAI6FPSX45JBLMQOKA', 'muPRtvotIlh1QNWdo4t/QV52gjLIMwnTwEN4W7wR', 'us-west-2', 'es')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -76,14 +79,36 @@ WSGI_APPLICATION = 'Bartex.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
+'''
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'bartex',
+            'USER': 'root',
+            'PASSWORD': '',
+            'HOST': 'localhost' ,
+            'POST': '3306' ,
+        }
     }
-}
-
+'''
+if 'RDS_HOSTNAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'bartex',
+            'USER': 'rssbartex',
+            'PASSWORD': 'rssbartex',
+            'HOST': 'bartexdb.cqlsxqrtjjig.us-west-2.rds.amazonaws.com',
+            'PORT': '5432',
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
