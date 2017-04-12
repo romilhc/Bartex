@@ -48,10 +48,28 @@ def home(request):
             print("Password matched!!")
             user = User.objects.get(email=request.POST.get('email'))
             password = User.objects.get(password=request.POST.get('password'))
-            return render(request, 'homepage.html')
+            return render(request, 'home.html')
         except:
-            print("Password not matching")
-            return render(request,'index.html')
+            print ("Password not matching")
+            return render(request, 'index.html')
     else:
         print("Incorrect")
-        return render(request,'index.html')
+        return render(request, 'index.html')
+
+@csrf_exempt
+def profile(request):
+    return render(request, 'profile.html')
+
+@csrf_exempt
+def post(request):
+    return render(request, 'post.html')
+
+@csrf_exempt
+def contact(request):
+    return render(request, 'contact.html')
+
+@csrf_exempt
+def about(request):
+    return render(request, 'about.html')
+
+

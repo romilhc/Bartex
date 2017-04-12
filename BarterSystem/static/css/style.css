@@ -39,9 +39,14 @@ iframe {
 }
 
 
-header {
-    width: 100%;
-    overflow: hidden;
+.header {
+    z-index: 1;
+    position: fixed;
+    width: 97.5%;
+    margin-top: -20px;
+    height: 60px;
+    background-color: #668284;
+    margin-bottom: 10px;
 }
 span.new {
 	font-style: italic;
@@ -147,10 +152,9 @@ a:active {
 header {
     padding: 2em 0 2em 0; 
     text-align: center; 
-    background: #F5f5f5; 
-    color: #fff;
-}
 
+    color: #292929;
+}
 
 h1 {
     margin: 0;
@@ -170,6 +174,7 @@ header h2 {
 
 header h2.docs-header {
     margin: 0;
+
 }
 
 footer {
@@ -259,17 +264,15 @@ nav a:active {
     cursor: default;
 }
 
-
-
 nav ul.toplinks {
     padding: 20px 0 0 0;
-}
+align-items: center;}
 
 nav #menu {
     overflow: hidden;
     max-height: 0;
     clear: left;
-	  float: right;
+    float: left;
 }
 
 
@@ -322,14 +325,14 @@ nav #menu-toggle {
 
 
     nav ul.toplinks {
-        float: left;
+        float: none;
         padding: 0;
         clear: none;
+        align-content: center;
     }
-
     nav ul.toplinks li {
         margin: 0 0 0 10px;
-    }
+align-content: center;      }
 
     nav #menu-toggle {
         display: none !important;

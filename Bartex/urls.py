@@ -23,7 +23,11 @@ from BarterSystem.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
-    url(r'^homepage', home),
     url(r'^signin/', signin),
     url(r'^signup/', signup),
+    url(r'^home',home),
+    url(r'^profile.html',profile),
+    url(r'^contact.html',contact),
+    url(r'^about.html',about),
+    url(r'^post.html',post)
 ]  +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
