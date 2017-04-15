@@ -25,9 +25,10 @@ urlpatterns = [
     url(r'^$', index),
     url(r'^signin/', signin),
     url(r'^signup/', signup),
-    url(r'^home',home),
-    url(r'^profile.html',profile),
-    url(r'^contact.html',contact),
-    url(r'^about.html',about),
-    url(r'^post.html',post)
+    url(r'^home/',home),
+    url(r'^ref/',ref),
+    url(r'^profile/',profile),
+    url(r'^contactus/',contact),
+    url(r'^about/',about),
+    url(r'^post/',post)
 ]  +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
