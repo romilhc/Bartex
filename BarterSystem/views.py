@@ -9,6 +9,8 @@ from BarterSystem.models import *
 
 # Create your views here.
 def index(request):
+    if 'uid' in request.session:
+        del request.session['uid']
     return render(request,'index.html')
 
 @csrf_exempt
@@ -41,24 +43,72 @@ def signup(request):
     return render(request,'signup.html')
 
 @csrf_exempt
+def ref(request):
+    print(request.POST)
+    return render(request, 'homepage.html')
+
+@csrf_exempt
 def home(request):
     print(request.POST)
-    if request.POST.get('email'):
+
+    #return render(request, 'home.html')
+
+    if request.POST.get('email') and 'uid' not in request.session:
         try:
             print("Password matched!!")
-            user = User.objects.get(email=request.POST.get('email'))
-            password = User.objects.get(password=request.POST.get('password'))
-            return render(request, 'home.html')
+            user = User.objects.get(email=request.POST.get('email'),password=request.POST.get('password'))
+            request.session['uid'] = user.uid
+            print(request.session['uid'])
         except:
             print ("Password not matching")
-            return render(request, 'index.html')
-    else:
-        print("Incorrect")
-        return render(request, 'index.html')
+            return HttpResponse("<script>alert('Invalid Credential Details');location.href='/'</script>")
+
+    print(request.session['uid'])
+    if 'uid' in request.session:
+        return render(request,'home.html')
+
+
 
 @csrf_exempt
 def profile(request):
-    return render(request, 'profile.html')
+    if 'uid' in request.session:
+        user = User.objects.get(uid=request.session['uid'])
+        if request.method=="POST":
+
+            user.fname = request.POST.get('fname')
+            user.lname = request.POST.get('lname')
+            user.age = request.POST.get('age')
+            user.gender = request.POST.get('gender')
+            user.street = request.POST.get('street')
+            user.city = request.POST.get('city')
+            user.state = request.POST.get('state')
+            user.country = request.POST.get('country')
+            user.zipcode = request.POST.get('zipcode')
+            user.contact = request.POST.get('contact')
+            if request.POST.get('profession'):
+                user.profession = request.POST.get('profession')
+            else:
+                user.profession = None
+            user.save()
+            print("Reached")
+
+        user_details = json.dumps({
+            'fname':user.fname,
+            'lname':user.lname,
+            'age': user.age,
+            'gender': user.gender,
+            'street': user.street,
+            'city': user.city,
+            'state': user.state,
+            'country': user.country,
+            'zipcode': user.zipcode,
+            'contact': user.contact,
+            'profession': user.profession,
+        })
+        if request.method == "POST":
+            return JsonResponse({"status":"success"})
+        else:
+            return render(request, 'profile.html',{'user':user_details})
 
 @csrf_exempt
 def post(request):
