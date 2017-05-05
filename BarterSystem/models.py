@@ -48,8 +48,8 @@ class Post(models.Model):
     estimated_price = models.DecimalField(max_digits=15,decimal_places=3,default=0.0)
 
 class SwapChoice(models.Model):
-    pid = models.ForeignKey('Post',on_delete=models.CASCADE,null=True)
-    cid = models.ForeignKey('ProductCategory',on_delete=models.CASCADE,null=True)
+    pid_id = models.ForeignKey('Post',on_delete=models.CASCADE,null=True)
+    cid_id = models.ForeignKey('ProductCategory',on_delete=models.CASCADE,null=True)
 
 class Tag(models.Model):
     pid = models.ForeignKey('Post',on_delete=models.CASCADE,null=True)

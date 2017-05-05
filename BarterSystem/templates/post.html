@@ -1,10 +1,551 @@
+{% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>BartEx</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="{% static "vendor/metisMenu/metisMenu.min.css" %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static "css/sb-admin-2.css" %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static "vendor/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery -->
+    <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "vendor/bootstrap/js/bootstrap.min.js" %}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{% static "vendor/metisMenu/metisMenu.min.js" %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static "js/sb-admin-2.js" %}"></script>
+    <script src="{% static "js/script.js" %}"></script>
+
 </head>
 <body>
-Post an Item!!!
+    <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/home/">BartEx</a>
+                </div>
+
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <strong>John Smith</strong>
+                                        <span class="pull-right text-muted">
+                                            <em>Yesterday</em>
+                                        </span>
+                                    </div>
+                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <strong>John Smith</strong>
+                                        <span class="pull-right text-muted">
+                                            <em>Yesterday</em>
+                                        </span>
+                                    </div>
+                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <strong>John Smith</strong>
+                                        <span class="pull-right text-muted">
+                                            <em>Yesterday</em>
+                                        </span>
+                                    </div>
+                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>Read All Messages</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-messages -->
+                    </li>
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-tasks">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <p>
+                                            <strong>Task 1</strong>
+                                            <span class="pull-right text-muted">40% Complete</span>
+                                        </p>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                <span class="sr-only">40% Complete (success)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <p>
+                                            <strong>Task 2</strong>
+                                            <span class="pull-right text-muted">20% Complete</span>
+                                        </p>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                                <span class="sr-only">20% Complete</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <p>
+                                            <strong>Task 3</strong>
+                                            <span class="pull-right text-muted">60% Complete</span>
+                                        </p>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                                <span class="sr-only">60% Complete (warning)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <p>
+                                            <strong>Task 4</strong>
+                                            <span class="pull-right text-muted">80% Complete</span>
+                                        </p>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                                <span class="sr-only">80% Complete (danger)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>See All Tasks</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-tasks -->
+                    </li>
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-comment fa-fw"></i> New Comment
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                        <span class="pull-right text-muted small">12 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-tasks fa-fw"></i> New Task
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>See All Alerts</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-alerts -->
+                    </li>
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="/profile/"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+
+                            <li class="sidebar-search">
+                                <div class="input-group custom-search-form">
+                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                                </div>
+                                <!-- /input-group -->
+                            </li>
+
+                            <li>
+                                <a href="/home/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            </li>
+
+                            <li>
+                                <a href="/post/"><i class="fa fa-pencil fa-fw"></i> Post an item</a>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-refresh fa-fw"></i> Swaps<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="flot.html">Pending Swaps</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Completed Swaps</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="tables.html"><i class="fa fa-thumbs-o-up fa-fw"></i> Recommendations</a>
+                            </li>
+
+                            <li>
+                                <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="panels-wells.html">Panels and Wells</a>
+                                    </li>
+                                    <li>
+                                        <a href="buttons.html">Buttons</a>
+                                    </li>
+                                    <li>
+                                        <a href="notifications.html">Notifications</a>
+                                    </li>
+                                    <li>
+                                        <a href="typography.html">Typography</a>
+                                    </li>
+                                    <li>
+                                        <a href="icons.html"> Icons</a>
+                                    </li>
+                                    <li>
+                                        <a href="grid.html">Grid</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="#">Second Level Item</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Second Level Item</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level <span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li>
+                                                <a href="#">Third Level Item</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Third Level Item</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Third Level Item</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Third Level Item</a>
+                                            </li>
+                                        </ul>
+                                        <!-- /.nav-third-level -->
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="blank.html">Blank Page</a>
+                                    </li>
+                                    <li>
+                                        <a href="login.html">Login Page</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+        </div>
+        <div class="container">
+
+{#            <div class="col-md-5  toppad  pull-right col-md-offset-3 ">#}
+{#                <A href="edit.html" >Edit Profile</A>#}
+{#                <A href="edit.html" >Logout</A>#}
+{#                <br><p class=" text-info">May 05,2014,03:00 pm </p>#}
+{#            </div>#}
+
+            <script type="text/javascript"></script>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                         Post an item for exchange!!
+                    </div>
+
+                    <form method="post" action="/postin/">{% csrf_token %}
+                    <div class="panel-body">
+                         <div class="table-responsive table-bordered">
+                             <table>
+                                <tbody>
+                                    <tr>
+                                    <td class="col-md-4"><div class="form-group">
+                                            <label>Product name</label>
+                                            <input class="form-control" placeholder="Enter text" id="pname" name="pname">
+                                        </div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-4" id="categ">
+                                        <div class="form-group">
+                                                <label>Category</label>
+                                                <form id="form1" method="POST">
+                                                    {% csrf_token %}
+                                                    <select name="categories" id="categories">
+                                                        {% block content %}
+                                                            {% for cat in products %}
+                                                                <option value="{{ cat }}">{{ cat }}</option>
+                                                            {% endfor %}
+                                                        {% endblock %}
+                                                    </select>
+                                                </form>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td class="col-md-4"><div class="form-group">
+                                            <label>Product Age</label>
+                                            <input class="form-control" placeholder="Enter text" id="age" name="age">
+                                        </div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td  class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Estimated Price</label>
+                                            <input class="form-control" placeholder="Enter text" id="price" name="price">
+                                    </div>
+                                    </td>
+                                    <td  class="col-md-4"></td>
+                                    </tr>
+                                    <tr>
+                                    <td class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea class="form-control" rows="3" id="desc" name="desc"></textarea>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-4"></td>
+                                    </tr>
+                                    <tr>
+                                    <td class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Image</label>
+                                            <input type="file" id="imge" name="imge">
+                                        </div>
+                                    </td>
+                                    <td class="col-md-4"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Swap with</label>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" onclick="checkselection()" id="choice" name="choice">I know
+                                                    </label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onclick="checkselection()" id="choice" name="choice">I don't know
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-4" id="multiple" style="display:none">
+                                        <div class="form-group">
+                                            <label>Choose multiple categories</label>
+                                               <form id="form1" method="POST">
+                                                    {% csrf_token %}
+                                                      <select multiple="multiple" class="form-control" id="mcat" name="mcat">
+                                                       {% block contents %}
+                                                            {% for cat in products %}
+                                                                <option value="{{ cat }}">{{ cat}}</option>
+                                                            {% endfor %}
+                                                       {% endblock %}
+                                                      </select>
+
+                                               </form>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    </tr>
+
+                                </tbody>
+                             </table>
+                            <center><button type="submit" class="btn btn-primary">POST</button></center>
+                         </div>
+                    </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    <script type="text/javascript">
+        function checkselection(){
+            if(document.getElementById('optionsRadios1').checked) {
+                document.getElementById('multiple').style.display = 'block';
+            }
+            else if(document.getElementById('optionsRadios2').checked){
+                document.getElementById('multiple').style.display = 'none';
+                }
+
+        }
+        /*function  getdata() {
+            var selectedValues = $('#mcat').val();
+            $.ajax({
+            type: 'POST',
+            url: '/postin/',
+            contentType: 'application/json; charset=utf-8', //EDITED
+            data: JSON.stringify(selectedValues),
+            success: function(data) {
+                 $('body').html(data); //EDITED
+            },
+            error: function(rs, e) {
+                 alert(rs.responseText);
+            }
+        });
+        }*/
+
+    </script>
+
 </body>
 </html>

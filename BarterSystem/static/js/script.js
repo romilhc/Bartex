@@ -16,6 +16,7 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
 $.ajaxSetup({
     beforeSend: function(xhr, settings) {
         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
@@ -26,6 +27,8 @@ $.ajaxSetup({
 });
 
 
+
+
 function signin() {
     alert("setup works");
     var email = $('#email').val();
@@ -34,9 +37,10 @@ function signin() {
 
     alert(email);
     alert(password);
+    event.preventDefault();
     $.ajax({
-        type: "POST",
-        url: "/homepage/",
+        method: "POST",
+        url: "/home/",
         data: signinData,
         dataType: 'json',
         "beforeSend": function(xhr, settings) {
