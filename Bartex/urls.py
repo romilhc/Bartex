@@ -26,13 +26,9 @@ urlpatterns = [
     url(r'^signin/', signin),
     url(r'^signup/', signup),
     url(r'^home/',home),
-<<<<<<< HEAD
     url(r'^postin/',postin),
     url(r'^ref/',ref),
     #url(r'^swapost/',swapost),
-=======
-    url(r'^ref/',ref),
->>>>>>> 025c2bb1b678b0c72f2663873c9a3849e8f9b52f
     url(r'^profile/',profile),
     url(r'^contactus/',contact),
     url(r'^about/',about),
