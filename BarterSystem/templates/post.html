@@ -487,24 +487,60 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <!--<tr>
                                         <td class="col-md-4" id="multiple" style="display:none">
                                         <div class="form-group">
                                             <label>Choose multiple categories</label>
                                                <form id="form1" method="POST">
                                                     {% csrf_token %}
-                                                      <select multiple="multiple" class="form-control" id="mcat" name="mcat">
-                                                       {% block contents %}
-                                                            {% for cat in products %}
-                                                                <option value="{{ cat }}">{{ cat}}</option>
-                                                            {% endfor %}
-                                                       {% endblock %}
+                                                      <select multiple="multiple" class="form-control" id="mcat" name="cat">
+{#                                                       {% block contents %}#}
+{#                                                            {% for cat in products %}#}
+{#                                                                <option value="{{ cat }}">{{ cat}}</option>#}
+{#                                                            {% endfor %}#}
+{#                                                       {% endblock %}#}
                                                       </select>
 
                                                </form>
                                             </select>
                                         </div>
                                     </td>
+                                    </tr>-->
+                                    <tr>
+                                        <td class="col-md-4" id="multiple" style="display:none">
+                                        <div class="form-group">
+                                            <label>Choose Multiple Items</label>
+                                            <div class="checkbox">
+                                                <label>
+                                                    {% block contents %}
+                                                            {% for cat in products %}
+                                                                <input type="checkbox" name="cats" value="{{ cat }}">{{ cat}}</input>
+                                                            {% endfor %}
+                                                    {% endblock %}
+                                                </label>
+                                            </div>
+                                            <!--<div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="">accessories
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="">Musical Instruments
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="">Footwear
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="">Books
+                                                </label>
+                                            </div>-->
+                                        </div>
+                                        </td>
                                     </tr>
 
                                 </tbody>

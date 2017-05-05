@@ -154,15 +154,17 @@ def postin(request):
         items = Post(posted_by_uid_id = posted_by_uid_id, product_name=product_name, product_desc = product_desc, product_age = product_age, estimated_price = estimated_price,cid_id= cid_id,post_timestamp=post_timestamps,post_status=post_status)
         items.save()
         print("before call")
-        mcid_id = request.POST.getlist('mcat[]')
-        return HttpResponse("List items: %s" %mcid_id)
-        #getmcid = ProductCategory.objects.all().values_list(cname=mcid_id)
-        #cat_id = getmcid.cid
-        #poster = Post.objects.all().order_by('-pid')[0]
-        #print (poster)
-        #pid_ids = poster
-        #swapch = SwapChoice(cid_id=cat_id,pid_id=pid_ids)
-        #swapch.save()
+        mcid_id = request.POST.getlist('cats')
+        #return HttpResponse("List items: %s" %mcid_id)
+        print (mcid_id)
+        getmcid=list()
+        poster = Post.objects.all().order_by('-pid')[0]
+
+        for i in mcid_id:
+            pc = ProductCategory.objects.get(cname=i)
+            swapch = SwapChoice(cid_id=pc, pid_id=poster)
+            swapch.save()
+            #getmcid.append(ProductCategory.objects.get(cname=i))
         print("here")
     return render(request,'home.html')
 
