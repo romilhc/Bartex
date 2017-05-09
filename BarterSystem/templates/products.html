@@ -40,7 +40,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="{% static "js/sb-admin-2.js" %}"></script>
-    <script src="{% static "js/script.js" %}"></script>
 
 </head>
 
@@ -333,236 +332,75 @@
         </nav>
 
     </div>
-    <div id="page-wrapper" style="min-height: 1041px;">
-        <!-- trending -->
-        <form action="/products/" method="post">
-        <div class="row">
-             <div class="col-lg-12">
-                <h1 class="page-header">Trending</h1>
-             </div>
-             {% block trending %}
-                {% for i,j,k in posts %}
-                    {% if forloop.counter0 < 10 %}
-                        <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-primary">
-                             <div class="panel-heading">
-                                 <div class="row">
-                                     <div class="col-xs-3">
-                                        <i class="fa fa-comments fa-5x"></i>
-                                     </div>
-                                     <div class="col-xs-9 text-right">
-                                       <div class="huge"></div>
-                                       <div>{{ j }}</div>
-                                     </div>
-                                        </div>
-                                    </div>
-                                    <a href="">
-                                        <div class="panel-footer">
-                                            <span class="pull-left"></span>
-                                            <span class="pull-right"><button type="submit" class="btn btn-outline btn-primary" value="{{ j }}" id="productid" name="productid">View Details</button></span>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </a>
-                            </div>
-                            </div>
-                    {% endif %}
-               {% endfor %}
-             {% endblock %}
-        </div>
-        </form>
+    <div class="container">
 
-        <!-- Posted-->
-        <form action="/products/" method="post">
-        <div class="row">
-             <div class="col-lg-12">
-                <h1 class="page-header">Posted</h1>
-             </div>
-             {% block products %}
-                {% for i,j,k in posts %}
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"></div>
-                                    <div id="product">{{ i }}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-footer">
-                                <!--<span class="pull-left">View Details</span>-->
-                            <span class="pull-right"><button type="submit" class="btn btn-outline btn-warning" value="{{ j }}" id="productid" name="productid">View Details</button></span>
-                                <div class="clearfix"></div>
-                        </div>
+{#            <div class="col-md-5  toppad  pull-right col-md-offset-3 ">#}
+{#                <A href="edit.html" >Edit Profile</A>#}
+{#                <A href="edit.html" >Logout</A>#}
+{#                <br><p class=" text-info">May 05,2014,03:00 pm </p>#}
+{#            </div>#}
+
+            <script type="text/javascript"></script>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                         Product Details
                     </div>
+                    <table>
+                        <tbody>
+                            <div class="form-group">
+                             <tr>
+                                 <td class="col-md-4">Product Name</td>
+                                 <td class="col-md-4" id="pname"></td>
+                             </tr>
+                             <tr>
+                                 <td class="col-md-4" id="categ">Category</td>
+                                 <td class="col-md-4" id="pcat"></td>
+                             </tr>
+                             <tr>
+                                 <td class="col-md-4">Product Age</td>
+                                 <td class="col-md-4" id="age"></td>
+                             </tr>
+                             <tr>
+                                 <td  class="col-md-4">Estimated Price</td>
+                                 <td class="col-md-4" id="price"></td>
+                             </tr>
+                             <tr>
+                                 <td class="col-md-4">Description</td>
+                                 <td class="col-md-4" id="desc"></td>
+                             </tr>
+                             <tr>
+                                 <td class="col-md-4">post status</td>
+                                 <td class="col-md-4" id="pstatus"></td>
+                             </tr>
+                            </div>
+                        </tbody>
+                    </table>
+
+                    <div class="panel-body">
+
+
+                    </div>
+
+
                 </div>
-                {% endfor %}
-             {% endblock %}
 
-         </div>
-        </form>
-         <div class="row">
-             <div class="col-lg-12">
-                <h1 class="page-header">Request Pending sent by user</h1>
-             </div>
-             {% block pendingfrom %}
-                {% for i,j,k,x,l,m,n in swaps %}
-                   {% if k == 'P' %}
-                       {% if m != n %}
-                        <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-red">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <i class="fa fa-support fa-5x"></i>
-                                        </div>
-                                        <div class="col-xs-9 text-right">
-                                            <div class="huge"></div>
-                                            <div>{{ j }}</div>
-                                            <div id="pname">{{ l }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">View Details</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                       {%  endif %}
-                    {% endif %}
-                {% endfor %}
-             {% endblock %}
+            </div>
 
-         </div>
-         <!--<form action="/decision/" method="post">-->
-         <div class="row">
-             <div class="col-lg-12">
-                <h1 class="page-header">Request Pending for user</h1>
-             </div>
-             {% block pendingfor %}
-                {% for i,j,k,x,l,m,n in swaps %}
-                   {% if k == 'P' %}
-                     {% if m == n %}
-                        <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-red">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <i class="fa fa-support fa-5x"></i>
-                                        </div>
-                                        <div class="col-xs-9 text-right">
-                                            <div class="huge"></div>
-                                            <div>{{ j }}</div>
-                                            <div id="pending">{{ l }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left"><button type="submit" class="btn btn-outline btn-danger" onclick="accepted({{ x }})" value="A" id="acpt">Accept</button></span>
-                                        <span class="pull-right"><button type="submit" class="btn btn-outline btn-danger" onclick="rejected({{ x }})" value="R" id="rjt">Reject</button></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                     {% endif %}
-                    {% endif %}
-                {% endfor %}
-             {% endblock %}
-
-         </div>
-         <!--</form>-->
-
-         <!-- Swapped -->
-
-         <div class="row">
-             <div class="col-lg-12">
-                <h1 class="page-header">Swapped</h1>
-             </div>
-             {% block Swapped %}
-                {% for i,j,k,x,l,m,m in swaps %}
-                    {% if k == 'A' %}
-                        <div class="col-lg-3 col-md-6">
-                            <div class="panel panel-green">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <i class="fa fa-tasks fa-5x"></i>
-                                        </div>
-                                        <div class="col-xs-9 text-right">
-                                            <div>{{ j }}</div>
-                                            <div id="aname">{{ l }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#">
-                                    <div class="panel-footer">
-                                        <span class="pull-left">View Details</span>
-                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        {% endif %}
-                    {% endfor %}
-             {% endblock %}
-         </div>
-    </div>
-    <script type="application/javascript">
-
-        function accepted(x) {
-            dec = document.getElementById('acpt').value;
-            var decision_details = {'id':x,'dec':dec};
-               $.ajax({
-                    method: "POST",
-                    url: "/home/",
-                    data: decision_details,
-                    dataType: 'json',
-                    "beforeSend": function(xhr, settings) {
-                    console.log("Before Send");
-                    $.ajaxSettings.beforeSend(xhr, settings);
-                    alert("Sending");
-                    },
-                    success: function(result){
-
-                        alert("In success");
-                        location.reload();
-
-                    },
-               });
-        }
-         function rejected(x) {
-            dec = document.getElementById('rjt').value;
-            var decision_details = {'id':x,'dec':dec};
-               $.ajax({
-                    method: "POST",
-                    url: "/home/",
-                    data: decision_details,
-                    dataType: 'json',
-                    "beforeSend": function(xhr, settings) {
-                    console.log("Before Send");
-                    $.ajaxSettings.beforeSend(xhr, settings);
-                    alert("Sending");
-                    },
-                    success: function(result){
-
-                        //alert("Back in profile");
-                        location.reload();
-
-                    },
-
-                });
-        }
-
-    </script>
+        </div>
+        <script>
+            function filldetails(prod) {
+                document.getElementById('pname').innerHTML = prod['product_name'];
+                document.getElementById('age').innerHTML = prod['product_age'];
+                document.getElementById('desc').innerHTML = prod['product_desc'];
+                document.getElementById('pstatus').innerHTML = prod['post_status'];
+                document.getElementById('price').innerHTML = prod['estimated_price'];
+                document.getElementById('desc').innerHTML = prod['posted_by_uid'];
+                document.getElementById('desc').innerHTML = prod['pid'];
+            }
+            filldetails({{ productDetails|safe }})
+        </script>
 </body>
 </html>

@@ -32,5 +32,6 @@ urlpatterns = [
     url(r'^profile/',profile),
     url(r'^contactus/',contact),
     url(r'^about/',about),
-    url(r'^post/',post)
+    url(r'^post/',post),
+    url(r'^products/',products),
 ]  +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

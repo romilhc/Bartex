@@ -34,7 +34,7 @@ class ProductCategory(models.Model):
 
 class Post(models.Model):
     pid = models.AutoField(primary_key=True,null=False)
-    posted_by_uid = models.ForeignKey('User',on_delete=models.CASCADE,null=True,related_name='posted_by_uid')
+    posted_by_uid_id = models.ForeignKey('User',on_delete=models.CASCADE,null=True,related_name='posted_by_uid')
     product_name = models.CharField(max_length=40,null=False)
     product_desc = models.CharField(max_length=150,null=False)
     product_age = models.PositiveIntegerField(null=False)
@@ -56,6 +56,7 @@ class Tag(models.Model):
     tag_name = models.CharField(primary_key=True,null=False,max_length=40)
 
 class Swap(models.Model):
+    id = models.AutoField(primary_key=True,null=False)
     sender_pid = models.ForeignKey('Post',on_delete=models.CASCADE,related_name='sender_pid',null=True)
     receiver_pid= models.ForeignKey('Post',on_delete=models.CASCADE,related_name='receiver_pid',null=True)
 
