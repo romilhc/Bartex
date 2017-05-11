@@ -28,10 +28,11 @@ urlpatterns = [
     url(r'^home/',home),
     url(r'^postin/',postin),
     url(r'^ref/',ref),
-    #url(r'^swapost/',swapost),
     url(r'^profile/',profile),
     url(r'^contactus/',contact),
     url(r'^about/',about),
     url(r'^post/',post),
-    url(r'^products/',products),
+    url(r'^recommendations/',recommendations),
+    url(r'^setnotifications/', setnotifications),
+    url(r'^products/', products),
 ]  +static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

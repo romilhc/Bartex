@@ -9,8 +9,15 @@ import datetime
 from django.template.loader import render_to_string
 from django.core import serializers
 from itertools import chain
+import boto3
 
 # -*- coding: utf-8 -*-
+# sns_client = boto3.client('sns',region_name="us-west-2")
+# sqs_client = boto3.client('sqs',
+#                             aws_access_key_id = '',
+#                             aws_secret_access_key = '',
+#                           )
+
 
 
 # Create your views here.
@@ -41,7 +48,10 @@ def signin(request):
         password = request.POST.get('password')
         user = User(fname=fname,lname=lname,email=email,age=age,gender=gender,street=street,city=city,state=state,country=country,zipcode=zipcode,contact=contact,profession=profession,password=password)
         user.save()
-
+        # response = sqs_client.create_queue(
+        #     QueueName=str(user.uid)
+        # )
+        # print(response)
     return render(request,'signin.html')
 
 @csrf_exempt
@@ -54,7 +64,7 @@ def ref(request):
     return render(request, 'homepage.html')
 
 @csrf_exempt
-def home(request):
+def home(request,**kwargs):
     print(request.POST)
 
     #return render(request, 'home.html')
@@ -65,6 +75,18 @@ def home(request):
             user = User.objects.get(email=request.POST.get('email'),password=request.POST.get('password'))
             request.session['uid'] = user.uid
             print(request.session['uid'])
+        # sqs_response = sqs_client.get_queue_url(
+        #     QueueName=str(request.session['uid'])
+        # )
+        # sqs_queue_arn = sqs_client.get_queue_attributes(
+        #     QueueUrl=sqs_response['QueueUrl'],
+        #
+        # )
+        # print(sqs_queue_arn)
+        # # response = sns_client.publish(
+        #     TargetArn=sqs_response['QueueUrl'],
+        #     Message="You have just logged in!"
+        # )
             #posts = Post.objects.all().values_list('product_name', flat=True)
         except:
             print ("Password not matching")
@@ -72,6 +94,7 @@ def home(request):
 
     print(request.session['uid'])
     if 'uid' in request.session:
+
         if request.method == "POST":
             id = request.POST.get('id')
             dec = request.POST.get('dec')
@@ -89,9 +112,9 @@ def home(request):
             pending_prod['pid'] = receiver_details.pid
             pending_prod['swap_status'] = k
             print ("see")
-            print (receiver_details.posted_by_uid_id.uid)
+            print (receiver_details.posted_by_uid.uid)
             print (session_id)
-            prod_list.append((j, i, k,x, receiver_details.product_name, receiver_details.posted_by_uid_id.uid,session_id))
+            prod_list.append((j, i, k,x, receiver_details.product_name, receiver_details.posted_by_uid.uid,session_id))
         print ("success in home")
         return render(request, 'home.html', {'posts': posts,'swaps':prod_list})
 
@@ -113,8 +136,9 @@ def products(request):
             'posted_by_uid':int(product_details.posted_by_uid.uid),
             'product_desc': str(product_details.product_desc),
             'product_age':int(product_details.product_age),
-            'post_status':status,
+            'status':status,
             'estimated_price':float(product_details.estimated_price),
+            'category': str(product_details.cid.cname),
         })
         return render(request,'products.html',{'productDetails':prod_det})
 
@@ -226,4 +250,87 @@ def contact(request):
 def about(request):
     return render(request, 'about.html')
 
+@csrf_exempt
+def setnotifications(request):
+    notification = Notification.objects.filter(uid__uid=request.session['uid'], view_status='N')
+    print(notification)
+    notification_list=list()
 
+    for n in notification:
+        nd = dict()
+        nd['msg'] = n.notification
+        nd['time']= divmod((n.notification_timestamp.replace(tzinfo=None)-datetime.datetime.now()).seconds,3600)[0]
+        notification_list.append(nd)
+
+    return JsonResponse({"status": notification_list})
+
+@csrf_exempt
+def recommendations(request):
+    if 'uid' in request.session:
+        print('Swap IDs',request.POST)
+        if request.method == 'POST' and request.POST.get('sender_pid') and request.POST.get('receiver_pid'):
+            sender_pid = Post.objects.get(pid=request.POST.get('sender_pid'))
+            receiver_pid = Post.objects.get(pid=request.POST.get('receiver_pid'))
+            swap = Swap(sender_pid=sender_pid,receiver_pid=receiver_pid)
+            swap.save()
+            notification = Notification(uid=receiver_pid.posted_by_uid,notification=(sender_pid.posted_by_uid.fname + ' sent you a swap request. Please view your pendings requests.'))
+            notification.save()
+            return JsonResponse({"status": "success"})
+
+        posts = Post.objects.filter(posted_by_uid=request.session['uid'])
+        post_list = dict()
+        for p in posts:
+            print('\n')
+            print('Product ',p.product_name)
+            print('Price ',p.estimated_price)
+            print('Posted_by Uid ',p.posted_by_uid.uid)
+            post_list[(p.pid,p.product_name)] = list()
+            categories = SwapChoice.objects.filter(pid_id=p.pid)
+            print('Categories',categories)
+
+            if(len(categories)==0):
+                recommended_posts = Post.objects.filter(estimated_price__range=(float(p.estimated_price)-float(50),float(p.estimated_price)+float(50)),post_status='A').exclude(posted_by_uid__uid=p.posted_by_uid.uid)
+            else:
+                categories_list = list()
+                for c in categories:
+                    categories_list.append(c.cid_id.cid)
+                print(categories_list)
+                recommended_posts = Post.objects.filter(
+                    estimated_price__range=(float(p.estimated_price) - float(50), float(p.estimated_price) + float(50)),
+                    post_status='A',cid__cid__in=categories_list).exclude(posted_by_uid__uid=p.posted_by_uid.uid)
+
+            print('Posts ')
+            for i in recommended_posts:
+                try:
+                    swap_data = Swap.objects.get(sender_pid__pid__in=[p.pid,i.pid],receiver_pid__pid__in=[p.pid,i.pid])
+                except:
+                    recommended_posts_categories = SwapChoice.objects.filter(pid_id=i.pid)
+
+                    if (len(recommended_posts_categories) == 0):
+                        print(i.product_name)
+                        post_data = dict()
+                        post_data['id'] = i.pid
+                        post_data['name'] = i.product_name
+                        post_data['desc'] = i.product_desc
+                        post_data['category'] = i.cid.cname
+                        post_data['posted_by'] = i.posted_by_uid.fname
+                        post_list[(p.pid,p.product_name)].append(post_data)
+                    else:
+                        recommendations_categories_list = list()
+                        for rc in recommended_posts_categories:
+                            if (rc.cid_id.cid == p.cid.cid):
+                                print(i.product_name)
+                                post_data = dict()
+                                post_data['id'] = i.pid
+                                post_data['name'] = i.product_name
+                                post_data['desc'] = i.product_desc
+                                post_data['category'] = i.cid.cname
+                                post_data['posted_by'] = i.posted_by_uid.fname
+                                post_list[(p.pid,p.product_name)].append(post_data)
+                                break
+
+        print(post_list)
+
+        return render(request, 'recommendations.html',{'recommendations': post_list})
+
+#(?P<username>[a-zA-Z0-9]{1,})

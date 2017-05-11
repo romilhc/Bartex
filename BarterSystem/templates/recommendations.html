@@ -1,0 +1,98 @@
+{% include 'navbar.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <div class="container">
+    <form action="/products/" method="post">
+
+        <div class="row"><br>
+{#            <div class="col-md-5  toppad  pull-right col-md-offset-3 ">#}
+{#                <A href="edit.html" >Edit Profile</A>#}
+{#                <A href="edit.html" >Logout</A>#}
+{#                <br><p class=" text-info">May 05,2014,03:00 pm </p>#}
+{#            </div>#}
+
+            <script type="text/javascript"></script>
+
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2 toppad" >
+
+
+                {% for k,v in recommendations.items %}
+
+                    <div>
+                        <h3>{{ k.1 }}</h3>
+                        <div class="row">
+                            {% for i in v %}
+                                <div class="col-lg-3 col-md-10">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                &nbsp;<b><a data-toggle="collapse" data-parent="#accordion" href="{{ '#' }}{{ k.0 }}{{i.id}}" aria-expanded="false" class="collapsed">{{ i.name }}</a></b>
+
+                                            </div>
+                                        </div>
+
+                                        <div id="{{ k.0 }}{{i.id}}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                            <div class="panel-body">
+                                                <blockquote>
+                                                  <p class="text-danger">{{ i.desc }}</p>
+                                                  <small>{{ i.category }} Posted By <cite title="Posted by">{{ i.posted_by }}</cite></small>
+                                                </blockquote>
+                                            </div>
+
+                                            <div class="panel-footer">
+                                                <button class="pull-left btn btn-primary btn-xs" value="{{ i.id }}" id="productid" name="productid"><span>View Post</span></button>
+                                                <button class="pull-right btn btn-primary btn-xs" onclick="sendSwapRequest({{ k.0 }},{{ i.id }})"><span>Swap</span></button>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </form>
+    </div>
+
+    <script>
+
+        function sendSwapRequest(senderPostId,receiverPostId) {
+            alert(senderPostId);
+            alert(receiverPostId);
+            var swap = {'sender_pid':senderPostId,'receiver_pid':receiverPostId};
+
+            $.ajax({
+                method: "POST",
+                url: "/recommendations/",
+                data: swap,
+                dataType: 'json',
+                "beforeSend": function(xhr, settings) {
+                    console.log("Before Send");
+                    $.ajaxSettings.beforeSend(xhr, settings);
+                    alert("Sending");
+                },
+                success: function(result){
+                    //alert('Swapped');
+                    //alert("Back in profile");
+                    location.reload();
+
+                }
+            });
+        }
+
+    </script>
+
+
+</body>
+</html>
