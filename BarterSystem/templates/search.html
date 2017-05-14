@@ -1,0 +1,59 @@
+{% include 'navbar.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<body>
+
+
+    <div class="container">
+
+{#            <div class="col-md-5  toppad  pull-right col-md-offset-3 ">#}
+{#                <A href="edit.html" >Edit Profile</A>#}
+{#                <A href="edit.html" >Logout</A>#}
+{#                <br><p class=" text-info">May 05,2014,03:00 pm </p>#}
+{#            </div>#}
+
+            <script type="text/javascript"></script>
+
+
+        </div>
+         <div id="page-wrapper" style="min-height: 1041px;">
+        <!-- trending -->
+        <form action="/details/" method="post">
+        <div class="row">
+             <div class="col-lg-12">
+                <h1 class="page-header">Search Results</h1>
+             </div>
+             {% block results %}
+                        {% for s in results %}
+                        <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                             <div class="panel-heading">
+                                 <div class="row">
+                                     <div class="col-xs-3">
+                                        <i class="fa fa-comments fa-5x"></i>
+                                     </div>
+                                     <div class="col-xs-9 text-right">
+                                       <div class="huge"></div>
+                                       <div>{{ s.1 }}</div>
+                                     </div>
+                                        </div>
+                                    </div>
+                                    <a href="">
+                                        <div class="panel-footer">
+                                            <span class="pull-left"></span>
+                                            <span class="pull-right"><button type="submit" class="btn btn-outline btn-primary" value="{{ s.0 }}:{{ s.2 }}" id="searchresult" name="searchresult">View Details</button></span>
+                                            <p style="display: none" id="type" name="type" value="{{ s.2 }}"></p>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </a>
+                            </div>
+                            </div>
+                        {% endfor %}
+             {% endblock %}
+        </div>
+        </form>
+         </div>
+</body>
+</html>

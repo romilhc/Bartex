@@ -21,7 +21,7 @@
                          Post an item for exchange!!
                     </div>
 
-                    <form method="post" action="/postin/">{% csrf_token %}
+                    <form method="post" action="/products/">{% csrf_token %}
                     <div class="panel-body">
                          <div class="table-responsive table-bordered">
                              <table>
@@ -58,28 +58,10 @@
                                     </td>
                                     </tr>
                                     <tr>
-                                    <td  class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Estimated Price</label>
-                                            <input class="form-control" placeholder="Enter text" id="price" name="price">
-                                    </div>
-                                    </td>
-                                    <td  class="col-md-4"></td>
-                                    </tr>
-                                    <tr>
                                     <td class="col-md-4">
                                         <div class="form-group">
                                             <label>Description</label>
                                             <textarea class="form-control" rows="3" id="desc" name="desc"></textarea>
-                                        </div>
-                                    </td>
-                                    <td class="col-md-4"></td>
-                                    </tr>
-                                    <tr>
-                                    <td class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Image</label>
-                                            <input type="file" id="imge" name="imge">
                                         </div>
                                     </td>
                                     <td class="col-md-4"></td>
@@ -126,13 +108,15 @@
                                         <div class="form-group">
                                             <label>Choose Multiple Items</label>
                                             <div class="checkbox">
-                                                <label>
+
                                                     {% block contents %}
-                                                            {% for cat in products %}
-                                                                <input type="checkbox" name="cats" value="{{ cat }}">{{ cat}}</input>
-                                                            {% endfor %}
+                                                        {% for cat in products %}
+                                                            <label>
+                                                                <input type="checkbox" name="cats" value="{{ cat }}">{{ cat }}
+                                                            </label>
+                                                        {% endfor %}
                                                     {% endblock %}
-                                                </label>
+
                                             </div>
                                             <!--<div class="checkbox">
                                                 <label>
@@ -160,7 +144,7 @@
 
                                 </tbody>
                              </table>
-                            <center><button type="submit" class="btn btn-primary">POST</button></center>
+                            <center><button type="submit" class="btn btn-primary">POST</button></center><br>
                          </div>
                     </div>
                     </form>
@@ -191,7 +175,7 @@
                  $('body').html(data); //EDITED
             },
             error: function(rs, e) {
-                 alert(rs.responseText);
+                 //alert(rs.responseText);
             }
         });
         }*/

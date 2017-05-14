@@ -16,7 +16,7 @@
 
             <script type="text/javascript"></script>
             <br>
-            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+            <div class="col-xs-10 col-sm-10 col-md-12 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
 
 
                 <div class="panel panel-primary">
@@ -26,8 +26,8 @@
 
                     <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3 col-lg-3 " align="center">
-                            <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive">
+{#                        <div class="col-md-3 col-lg-3 " align="center">#}
+
                         </div>
 
                     <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
@@ -42,46 +42,111 @@
                     <dd>Male</dd>
                     </dl>
                     </div>-->
-                        <div class=" col-md-9 col-lg-9 ">
-                            <table class="table table-user-information">
-                            <tbody>
-                            <tr>
-                            <td>Product Name :</td>
-                            <td id="pname"></td>
-                            </tr>
-                            <tr>
-                            <td>Category :</td>
-                            <td id="pcat"></td>
-                            </tr>
-                            <tr>
-                            <td>How many years old is the product?</td>
-                            <td id="age"></td>
-                            </tr>
+
+                            <div class="col-md-12 col-lg-12 ">
+                                <table class="table table-user-information">
+                                <tbody>
+                                <tr>
+                                <td>Product Name :</td>
+                                <td id="pname"></td>
+                                </tr>
+                                <tr>
+                                <td>Category :</td>
+                                <td id="pcat"></td>
+                                </tr>
+                                <tr>
+                                <td>How many years old is the product?</td>
+                                <td id="age"></td>
+                                </tr>
 
 
-                            <tr>
-                            <td>Estimated Price :</td>
-                            <td id="price"></td>
-                            </tr>
+                                <tr>
+                                <td>Estimated Price :</td>
+                                <td id="price"></td>
+                                </tr>
 
-                            <tr>
-                            <td>Description :</td>
-                            <td id="desc"></td>
-                            </tr>
+                                <tr>
+                                <td>Description :</td>
+                                <td id="desc"></td>
+                                </tr>
 
-                            <tr>
-                            <td>Status :</td>
-                            <td id="status"></td>
-                            </tr>
+                                <tr>
+                                <td>Status :</td>
+                                <td id="status"></td>
+                                </tr>
+
+                                <tr>
+                                <td>Posted By :</td>
+                                <td id="posted_by"></td>
+                                </tr>
 
 
-                            </tbody>
-                            </table>
+                                </tbody>
+                                </table>
 
-                        <!--<a href="#" class="btn btn-primary">My Sales Performance</a>
-                        <a href="#" class="btn btn-primary">Team Sales Performance</a>-->
-                        </div>
+                            <!--<a href="#" class="btn btn-primary">My Sales Performance</a>
+                            <a href="#" class="btn btn-primary">Team Sales Performance</a>-->
+                            </div>
+
+{#                        </div>#}
+
                     </div>
+                    <div class="panel-footer">
+                        <span class="pull-left"><i class="fa fa-thumbs-o-up fa-2x" onclick="like()"></i>&nbsp;<b><span id="liked_post">{{ liked_post }}</span> thumbs up &nbsp; </b> </span>
+                        <span class="pull-left"><button type="button" class="btn btn-danger btn-circle" onclick="fav()"><i class="fa fa-heart"></i>
+                        </button>&nbsp;<b><span id="faved_post">{{ faved_post }}</span> favourites &nbsp; </b></span>
+                        <br><br>
+
+
+                            <div class="container" id="reviews">
+                        {#    <div class="col-sm-1">#}
+                        {#        <div class="thumbnail">#}
+                        {#        </div>#}
+                        {#    </div>#}
+                            {% for i in post_comments %}
+                            <div class="col-sm-7">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+
+                                <strong>{{ i.0 }}</strong> posted<span><i><b></b></i></span><span>
+
+                                    <b>{{ i.3 }} hours ago</b>
+                                    </span>
+                                    <div class="pull-right">{% for stars in i.2 %}
+                                    <span class="glyphicon glyphicon-star"></span>
+                                {% endfor %}</div>
+
+                                </div>
+                                    <div class="panel-body">
+                                        {{ i.1 }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            </div>
+
+                        <table class="table table-striped table-hover">
+                            <tbody>
+                                <tr>
+                                <td>
+                                    <div class="col-lg-14">
+                                        <input type="text" class="form-control"  placeholder="Comment" name="comment" id="comment">
+                                    </div>
+                                </td>
+                                <td>
+                                    <select class="form-control" id="rate" name="ratings">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </td>
+                                <td><a onclick="addcomment()" class="btn btn-primary">Add my review!</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
@@ -99,10 +164,104 @@
                 document.getElementById('price').innerHTML = '$'+prod['estimated_price'];
                 document.getElementById('pcat').innerHTML = prod['category'];
                 document.getElementById('status').innerHTML = prod['status'];
+                document.getElementById('posted_by').innerHTML = prod['posted_by_fname'];
                 //document.getElementById('desc').innerHTML = prod['posted_by_uid'];
                 //document.getElementById('desc').innerHTML = prod['pid'];
             }
+
             filldetails({{ productDetails|safe }})
+
+            function addcomment() {
+                var product = {{ productDetails|safe }};
+                var comment = {'pid':product['pid'],'comment':document.getElementById('comment').value,'rating':document.getElementById('rate').value};
+                console.log(comment);
+
+                $.ajax({
+                    method: "Post",
+                    url: "/products/",
+                    data: comment,
+                    dataType: 'json',
+                    "beforeSend": function(xhr, settings) {
+                        console.log("Before Send");
+                        $.ajaxSettings.beforeSend(xhr, settings);
+                        ////////alert("Sending");
+                    },
+                    success: function(result){
+                        alert('Success');
+                    },
+                    complete: function() {
+
+                        var stars='';
+                        var s1 = '<span class="glyphicon glyphicon-star"></span>';
+                        for(var i = 0; i<comment['rating'];i++) {
+                            stars = stars + s1;
+                            console.log(i,stars,s1);
+                        }
+
+                        var new_comment = '<div class="panel panel-primary">' +
+                            '<div class="panel-heading">' +
+                            '<strong>' + 'You' + '</strong> posted<span><i><b></b></i></span><span>' +
+                            '<b> now</b>' +
+                                    '</span>' +
+                                    '<div class="pull-right">' +
+                                    stars +
+
+                                '</div>' +
+
+                                '</div>' +
+                                    '<div class="panel-body">' +comment['comment'] +
+
+                                    '</div>' +
+                                '</div>';
+                        var div = document.createElement('div');
+                        div.innerHTML = new_comment;
+                        div.setAttribute("class","col-sm-7");
+                        document.getElementById('reviews').appendChild(div);
+                    }
+                });
+            }
+
+            function like() {
+                var product = {{ productDetails|safe }};
+                var like = {'liked_pid':product['pid']};
+                console.log(like);
+
+                $.ajax({
+                    method: "Post",
+                    url: "/products/",
+                    data: like,
+                    dataType: 'json',
+                    "beforeSend": function(xhr, settings) {
+                        console.log("Before Send");
+                        $.ajaxSettings.beforeSend(xhr, settings);
+                        ////////alert("Sending");
+                    },
+                    complete: function(){
+                        document.getElementById('liked_post').innerHTML = parseInt(document.getElementById('liked_post').innerHTML) + 1
+                    }
+                });
+            }
+
+            function fav() {
+                var product = {{ productDetails|safe }};
+                var fav = {'faved_pid':product['pid']};
+                console.log(fav);
+
+                $.ajax({
+                    method: "Post",
+                    url: "/products/",
+                    data: fav,
+                    dataType: 'json',
+                    "beforeSend": function(xhr, settings) {
+                        console.log("Before Send");
+                        $.ajaxSettings.beforeSend(xhr, settings);
+                        ////////alert("Sending");
+                    },
+                    complete: function(){
+                        document.getElementById('faved_post').innerHTML = parseInt(document.getElementById('faved_post').innerHTML) + 1
+                    }
+                });
+            }
         </script>
 </body>
 </html>

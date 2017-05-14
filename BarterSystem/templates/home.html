@@ -14,8 +14,8 @@
                 <h1 class="page-header">Trending</h1>
              </div>
              {% block trending %}
-                {% for i,j,k in posts %}
-                    {% if forloop.counter0 < 10 %}
+                {% for i,j,k,l in trending %}
+                    {% if forloop.counter0 < 5 %}
                         <div class="col-lg-3 col-md-8">
                         <div class="panel panel-primary">
                              <div class="panel-heading">
@@ -50,7 +50,7 @@
                 <h1 class="page-header">Posted</h1>
              </div>
              {% block products %}
-                {% for i,j,k in posts %}
+                {% for i,j,k,l in posts %}
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-yellow">
                         <div class="panel-heading">
@@ -78,12 +78,14 @@
 
         <div class="row">
          <div class="col-lg-12">
-            <h1 class="page-header">Request Pending sent by user</h1>
+            <h1 class="page-header">Request sent</h1>
          </div>
          {% block pendingfrom %}
-            {% for i,j,k,x,l,m,n in swaps %}
+            {% for j,i,k,x,l,m,n,o in send %}
+
                {% if k == 'P' %}
-                   {% if m != n %}
+                   {% if m == n %}
+
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-red">
                             <div class="panel-heading">
@@ -93,31 +95,33 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge"></div>
-                                        <div>{{ j }}</div>
-                                        <div id="pname">{{ l }}</div>
+                                        <div id="pname">Request sent from :{{ l }}</div>
+                                        <div id="pname">for :{{ o }}</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel-footer">
                                     <!--<span class="pull-left">View Details</span>-->
-                                <span class="pull-right"><button type="submit" class="btn btn-outline btn-warning" value="{{ j }}" id="productid" name="productid">View Details</button></span>
+                                <span class="pull-right"><button type="submit" class="btn btn-outline btn-warning" value="{{ i }}" id="productid" name="productid">View Details</button></span>
                                     <div class="clearfix"></div>
                             </div>
                         </div>
                     </div>
                    {%  endif %}
+
                 {% endif %}
             {% endfor %}
          {% endblock %}
 
         </div>
+        </form>
         <!--<form action="/decision/" method="post">-->
         <div class="row">
          <div class="col-lg-12">
-            <h1 class="page-header">Request Pending for user</h1>
+            <h1 class="page-header">Request recieved </h1>
          </div>
          {% block pendingfor %}
-            {% for i,j,k,x,l,m,n in swaps %}
+            {% for i,j,k,x,l,m,n,o in swaps %}
                {% if k == 'P' %}
                  {% if m == n %}
                     <div class="col-lg-3 col-md-6">
@@ -129,14 +133,19 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge"></div>
-                                        <div>{{ j }}</div>
-                                        <div id="pending">{{ l }}</div>
+                                        <div id="pending">Request received for: {{ l }}</div>
+                                        <div>from : {{ o }}</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel-footer">
-                                <span class="pull-left"><button type="submit" class="btn btn-outline btn-danger" onclick="accepted({{ x }})" value="A" id="acpt">Accept</button></span>
-                                <span class="pull-right"><button type="submit" class="btn btn-outline btn-danger" onclick="rejected({{ x }})" value="R" id="rjt">Reject</button></span>
+                                <span class="pull-left"><button type="submit" class="btn btn-default btn-circle" onclick="accepted({{ x }})"value="A" id="acpt"><i class="fa fa-check"></i>
+                                </button></span>
+                                <span class="pull-left"><button type="button" class="btn btn-warning btn-circle" onclick="rejected({{ x }})" value="R" id="rjt"><i class="fa fa-times"></i>
+                                </button></span>
+                                <form action="/products/" method="post">
+                                <span class="pull-right"><button type="submit" class="btn btn-outline btn-warning" value="{{ i }}" id="productid" name="productid">View Details</button></span>
+                                </form>
                                 <div class="clearfix"></div>
                             </div>
 
@@ -151,13 +160,13 @@
         <!--</form>-->
 
         <!-- Swapped -->
-
+        <form action="/products/" method="post">
         <div class="row">
          <div class="col-lg-12">
             <h1 class="page-header">Swapped</h1>
          </div>
          {% block Swapped %}
-            {% for i,j,k,x,l,m,m in swaps %}
+            {% for i,j,k,x,l,m,m,o in swaps %}
                 {% if k == 'A' %}
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-green">
@@ -167,7 +176,7 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div>{{ j }}</div>
+
                                         <div id="aname">{{ l }}</div>
                                     </div>
                                 </div>
@@ -200,15 +209,16 @@
                     "beforeSend": function(xhr, settings) {
                     console.log("Before Send");
                     $.ajaxSettings.beforeSend(xhr, settings);
-                    alert("Sending");
+                    //alert("Sending");
                     },
                     success: function(result){
 
-                        alert("In success");
+                        //alert("In success");
                         location.reload();
 
                     },
                });
+               location.reload();
         }
          function rejected(x) {
             dec = document.getElementById('rjt').value;
@@ -221,7 +231,7 @@
                     "beforeSend": function(xhr, settings) {
                     console.log("Before Send");
                     $.ajaxSettings.beforeSend(xhr, settings);
-                    alert("Sending");
+                    //alert("Sending");
                     },
                     success: function(result){
 
@@ -231,6 +241,7 @@
                     },
 
                 });
+               location.reload();
         }
 
     </script>

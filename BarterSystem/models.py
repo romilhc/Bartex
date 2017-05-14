@@ -1,10 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-
-from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
-
 # Create your models here.
 class User(models.Model):
     fname = models.CharField(max_length=40,null=False)
@@ -26,6 +22,7 @@ class User(models.Model):
     contact = models.CharField(max_length=15,null=False)
     profession = models.CharField(max_length=20,null=True)
     password = models.CharField(max_length=20,null=False)
+    #profile_pic = models.ImageField(null=True)
 
 class ProductCategory(models.Model):
     cid = models.AutoField(primary_key=True,null=False)
@@ -34,7 +31,7 @@ class ProductCategory(models.Model):
 
 class Post(models.Model):
     pid = models.AutoField(primary_key=True,null=False)
-    posted_by_uid_id = models.ForeignKey('User',on_delete=models.CASCADE,null=True,related_name='posted_by_uid')
+    posted_by_uid = models.ForeignKey('User',on_delete=models.CASCADE,null=True,related_name='posted_by_uid')
     product_name = models.CharField(max_length=40,null=False)
     product_desc = models.CharField(max_length=150,null=False)
     product_age = models.PositiveIntegerField(null=False)
@@ -45,7 +42,8 @@ class Post(models.Model):
     Post_Status = ((Active, 'A'), (Passive, 'P'))
     post_status = models.CharField(max_length=1,choices=Post_Status,default=Active,null=False)
     post_timestamp = models.DateTimeField(auto_now=True, null=False)
-    estimated_price = models.DecimalField(max_digits=15,decimal_places=3,default=0.0)
+    estimated_price = models.FloatField(default=0.0)
+    #post_pic = models.FileField(null=True)
 
 class SwapChoice(models.Model):
     pid_id = models.ForeignKey('Post',on_delete=models.CASCADE,null=True)
@@ -56,7 +54,7 @@ class Tag(models.Model):
     tag_name = models.CharField(primary_key=True,null=False,max_length=40)
 
 class Swap(models.Model):
-    id = models.AutoField(primary_key=True,null=False)
+    id=models.AutoField(primary_key=True,null=False)
     sender_pid = models.ForeignKey('Post',on_delete=models.CASCADE,related_name='sender_pid',null=True)
     receiver_pid= models.ForeignKey('Post',on_delete=models.CASCADE,related_name='receiver_pid',null=True)
 
@@ -93,6 +91,15 @@ class Favourite(models.Model):
     uid = models.ForeignKey('User', on_delete=models.CASCADE,null=True)
     pid = models.ForeignKey('Post', on_delete=models.CASCADE,null=True)
     favourite_timestamp = models.DateTimeField(auto_now=True,null=False)
+
+class Notification(models.Model):
+    uid = models.ForeignKey('User',on_delete=models.CASCADE,null=True)
+    notification = models.CharField(max_length=200,null=False)
+    Viewed = 'Y'
+    NotViewed = 'N'
+    Viewed_Status = ((Viewed, 'Y'), (NotViewed, 'N'))
+    view_status = models.CharField(max_length=1,choices=Viewed_Status, default=NotViewed,null=False)
+    notification_timestamp = models.DateTimeField(auto_now=True,null=False)
 
 
 

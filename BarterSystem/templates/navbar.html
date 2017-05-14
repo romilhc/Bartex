@@ -42,7 +42,13 @@
     <!-- Custom Theme JavaScript -->
     <script src="{% static "js/sb-admin-2.js" %}"></script>
     <script src="{% static "js/script.js" %}"></script>
-
+    <style>
+        .badge-notify{
+           background:red;
+           position:absolute;
+           top:3px;
+          }
+    </style>
 </head>
 <body>
 
@@ -62,141 +68,18 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>Read All Messages</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-messages -->
-                </li>
+
+                <!-- /.dropdown -->
+
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="delete_notifications()">
+                        <i class="fa fa-bell fa-fw"></i><span class="badge badge-notify" id="badge_notification"></span> <i class="fa fa-caret-down"></i>
+
                     </a>
-                    <ul class="dropdown-menu dropdown-tasks">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 1</strong>
-                                        <span class="pull-right text-muted">40% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 2</strong>
-                                        <span class="pull-right text-muted">20% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                            <span class="sr-only">20% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 3</strong>
-                                        <span class="pull-right text-muted">60% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 4</strong>
-                                        <span class="pull-right text-muted">80% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                            <span class="sr-only">80% Complete (danger)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Tasks</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-tasks -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-alerts list-group" id="notification">
+
+                    <div class="dropdown-menu dropdown-//////alerts list-group" id="notification">
+
 {#                        <li>#}
 {#                            <a href="#">#}
 {#                                <div>#}
@@ -244,12 +127,12 @@
 {#                        <li class="divider"></li>#}
 {#                        <li>#}
 {#                            <a class="text-center" href="#">#}
-{#                                <strong>See All Alerts</strong>#}
+{#                                <strong>See All //////alerts</strong>#}
 {#                                <i class="fa fa-angle-right"></i>#}
 {#                            </a>#}
 {#                        </li>#}
                     </div>
-                    <!-- /.dropdown-alerts -->
+                    <!-- /.dropdown-//////alerts -->
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -258,8 +141,6 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="/profile/"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -277,14 +158,16 @@
                     <ul class="nav" id="side-menu">
 
                         <li class="sidebar-search">
+                            <form action="/search/" method="post">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input type="text" class="form-control" placeholder="Search..." id="searching" name="searching">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
+                                <button class="btn btn-default" type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
                             </div>
+                            </form>
                             <!-- /input-group -->
                         </li>
 
@@ -297,92 +180,11 @@
                         </li>
 
                         <li>
-                            <a href="#"><i class="fa fa-refresh fa-fw"></i> Swaps<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Pending Swaps</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Completed Swaps</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-
-                        <li>
                             <a href="/recommendations/"><i class="fa fa-thumbs-o-up fa-fw"></i> Recommendations</a>
                         </li>
 
-                        <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                        </li>
 
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="panels-wells.html">Panels and Wells</a>
-                                </li>
-                                <li>
-                                    <a href="buttons.html">Buttons</a>
-                                </li>
-                                <li>
-                                    <a href="notifications.html">Notifications</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">Typography</a>
-                                </li>
-                                <li>
-                                    <a href="icons.html"> Icons</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grid</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="blank.html">Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href="login.html">Login Page</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -393,7 +195,7 @@
     <script>
 
         function getNotifications() {
-            //alert('Get Notifications');
+            ////////alert('Get Notifications');
 
             $.ajax({
                 method: "GET",
@@ -401,43 +203,82 @@
                 "beforeSend": function(xhr, settings) {
                     console.log("Before Send");
                     $.ajaxSettings.beforeSend(xhr, settings);
-                    //alert("Sending");
+                    ////////alert("Sending");
                 },
                 success: function(result){
-                    alert('Set success');
-                    //alert("Back in profile");
+                    ////////alert('Set success');
+                    ////////alert("Back in profile");
                     //location.reload();
                     console.log(result.status);
-                    var ul = document.getElementById('notification');
-                    for(var i in result.status) {
-                        console.log(result.status[i]);
-                        var n = result.status[i];
-                        var li = document.createElement("li");
-                        //li.setAttribute("class","");
-                        var msg = document.createElement("span");
-                        msg.innerHTML=n.msg;
-                        msg.setAttribute("class","pull-left text-muted small");
-                        li.appendChild(msg);
+                    if(result.status.length>0) {
+                        var ul = document.getElementById('notification');
 
-                        var time = document.createElement("span");
-                        time.innerHTML=n.time+' hours ago';
-                        time.setAttribute("class","pull-right text-muted small");
-                        li.appendChild(time);
-{#                        var time = document.createTextNode(n.time + " hours ago");#}
-{#                        time.setAttribute("class","pull-right text-muted small");#}
-{#                        li.appendChild()#}
+                        for (var i in result.status) {
+                            console.log(result.status[i]);
+                            var n = result.status[i];
+                            var div = document.createElement("div");
+                            var li = document.createElement("li");
+                            //li.setAttribute("class","");
+                            var msg = document.createElement("p");
+                            msg.innerHTML = ' ' + n.msg;
+                            msg.setAttribute("class", "pull-left text-danger small col-md-8");
+                            li.appendChild(msg);
 
-                        ul.appendChild(li);
-                        console.log(ul);
-                        console.log(li);
+                            var time = document.createElement("span");
+                            time.innerHTML = n.time + ' hours ago';
+                            time.setAttribute("class", "label label-primary pull-right text-primary col-md-4");
+                            li.appendChild(time);
+                            {#                        var time = document.createTextNode(n.time + " hours ago");#}
+                            {#                        time.setAttribute("class","pull-right text-muted small");#}
+                            {#                        li.appendChild()#}
+                            //                   div.setAttribute("class","col-md-8 ")
+                            ul.appendChild(div);
+                            console.log(ul);
+                            console.log(li);
+                            div.appendChild(li);
 
+                        }
+                        //console.log(result.status.length);
+                        document.getElementById("badge_notification").innerHTML = result.status.length;
                     }
-
                 }
             });
         }
+        //if(document.getElementById("badge_notification").innerHTML == "") {
+            getNotifications();
+        //}
 
-        getNotifications();
+        
+        
+        function delete_notifications() {
+            $.ajax({
+                method: "GET",
+                url: "/deletenotifications/",
+                "beforeSend": function(xhr, settings) {
+                    console.log("Before Send");
+                    $.ajaxSettings.beforeSend(xhr, settings);
+                    ////////alert("Sending");
+                },
+                success: function(result){
+                    console.log(result.status);
+                    if(result.status==="success") {
+                        var ul = document.getElementById('notification');
+                        while(ul.hasChildNodes()) {
+                            ul.removeChild(node.lastChild);
+                        }
+                        document.getElementById("badge_notification").innerHTML = "";
+                        console.log("Notifications deleted.");
+                    }
+                    else {
+                        console.log("Notifications not deleted.");
+                    }
+                }
+            });
+{#            setTimeout(function () {#}
+{#                #}
+{#            },1000);#}
+            //getNotifications();
+        }
     </script>
 </body>
 </html>

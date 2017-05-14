@@ -6,7 +6,6 @@
 <body>
 
     <div class="container">
-    <form action="/products/" method="post">
 
         <div class="row"><br>
 {#            <div class="col-md-5  toppad  pull-right col-md-offset-3 ">#}
@@ -24,6 +23,7 @@
 
                     <div>
                         <h3>{{ k.1 }}</h3>
+                        {% if v|length > 1 %}
                         <div class="row">
                             {% for i in v %}
                                 <div class="col-lg-3 col-md-10">
@@ -44,7 +44,10 @@
                                             </div>
 
                                             <div class="panel-footer">
+                                                <form action="/products/" method="post">
+
                                                 <button class="pull-left btn btn-primary btn-xs" value="{{ i.id }}" id="productid" name="productid"><span>View Post</span></button>
+                                                </form>
                                                 <button class="pull-right btn btn-primary btn-xs" onclick="sendSwapRequest({{ k.0 }},{{ i.id }})"><span>Swap</span></button>
                                                 <div class="clearfix"></div>
                                             </div>
@@ -56,20 +59,24 @@
                                 </div>
                             {% endfor %}
                         </div>
+                        {% else %}
+                        <b>No suitable recommendations for now!</b>
+                        {% endif %}
                     </div>
+
                 {% endfor %}
             </div>
 
         </div>
 
-    </form>
+
     </div>
 
     <script>
 
         function sendSwapRequest(senderPostId,receiverPostId) {
-            alert(senderPostId);
-            alert(receiverPostId);
+            ////alert(senderPostId);
+            ////alert(receiverPostId);
             var swap = {'sender_pid':senderPostId,'receiver_pid':receiverPostId};
 
             $.ajax({
@@ -80,11 +87,11 @@
                 "beforeSend": function(xhr, settings) {
                     console.log("Before Send");
                     $.ajaxSettings.beforeSend(xhr, settings);
-                    alert("Sending");
+                    //alert("Sending");
                 },
                 success: function(result){
-                    //alert('Swapped');
-                    //alert("Back in profile");
+                    ////alert('Swapped');
+                    ////alert("Back in profile");
                     location.reload();
 
                 }

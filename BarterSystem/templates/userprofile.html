@@ -110,11 +110,11 @@
 
 
                     <div class="panel-footer">
-                    <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-
-                    <span class="pull-right">
-                        <button class="btn btn-primary btn-sm" onclick='editprofile({{ user | safe }})' id="editprofile">Edit Profile</button>
-                    </span>
+{#                    <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>#}
+{##}
+{#                    <span class="pull-right">#}
+{#                        <button class="btn btn-primary btn-sm" onclick='editprofile({{ user | safe }})' id="editprofile">Edit Profile</button>#}
+{#                    </span>#}
                     </div>
 
                 </div>
@@ -130,7 +130,7 @@
             ////alert(Object.keys(user));
 
             // Set the user profile attributes
-            document.getElementById('profile_title').innerHTML = "Hi " + user['fname'] + " " + user['lname'] +"!";
+            document.getElementById('profile_title').innerHTML = user['fname'] + " " + user['lname'] +"!";
             document.getElementById('profile_fname').innerHTML = user['fname'];
             document.getElementById('profile_lname').innerHTML = user['lname'];
             document.getElementById('profile_age').innerHTML = user['age'];
@@ -229,7 +229,7 @@
             });
 
         }
-        
+
     </script>
 </body>
 </html>
